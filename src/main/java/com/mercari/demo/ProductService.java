@@ -31,4 +31,13 @@ public class ProductService {
         }
         productRepository.deleteById(id);
     }
+
+    // 서비스에 추가
+    public List<Product> searchProducts(String keyword) {
+        return productRepository.findByNameContaining(keyword);
+    }
+
+    public List<Product> filterProductsByPrice(Integer min, Integer max) {
+        return productRepository.findByPriceBetween(min, max);
+    }
 }

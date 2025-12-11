@@ -25,6 +25,23 @@ public class HelloController {
     public List<Product> getAllProducts() {
         return productService.getAllProducts(); // 매니저, 목록 가져와.
     }
+    // ... 기존 코드 ...
+
+    // [미션 1] 검색 기능 (GET /products/search?keyword=맥북)
+    // 컨트롤러 수정
+    @GetMapping("/products/search")
+    public List<Product> searchProducts(@RequestParam String keyword) {
+        return productService.searchProducts(keyword); // 서비스야 부탁해!
+    }
+
+    // [미션 2] 가격 필터 (GET /products/price?min=100&max=5000)
+    @GetMapping("/products/price")
+    public List<Product> filterByPrice(
+            @RequestParam Integer min,
+            @RequestParam Integer max) {
+        return productService.filterProductsByPrice(min, max);
+    }
+
 
     // @RequestParam: 주소 뒤에 "?이름=값" 형태로 들어오는 걸 받는다.
     @PostMapping("/products")
@@ -55,8 +72,5 @@ public class HelloController {
     public User createUser(@RequestBody User user) {
         return userRepository.save(user);
     }
+
 }
-
-
-
-
